@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Chivo" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+        crossorigin="anonymous">
+    <link href="assets/css/style.css" rel="stylesheet">
+
+    <title>Doctor Finder</title>
+</head>
+
+<body>
+    <div id="main-container">
+        <div class="jumbotron">
+            <h1>Doctor Finder®</h1>
+            <h5>Find the right doctor</h5>
+        </div>
+
+        <form class="form-inline" id="main-search" enctype="multipart/form-data" method="" action="" role="form">
+            <label class="sr-only" for="inlineFormInputName2">Specialty</label>
+            <input type="text" class="form-control xs-4 mb-2 mr-sm-2" id="specialty" placeholder="Doctor Specialty">
+            <label class="sr-only" for="inlineFormInputName2">Symptoms</label>
+            <input type="text" class="form-control xs-4 mb-2 mr-sm-2" id="symptoms" placeholder="Symptoms">
+            <label class="sr-only" for="inlineFormInputName2">Zip Code (Required)</label>
+
+            <input type="text" maxlength="5" class="form-control xs-4 mb-2 mr-sm-2 help-block with-errors" name="zip" id="zip"
+                placeholder="Zip Code (required)" required="required" data-error="Please enter a valid ZIP code.">
+            <button type="submit" class="btn btn-primary mb-2" id="submit"><i class="fas fa-search"></i> Search</button>
+            <div class="col-md-6 col-sm-6" id="need-zip">Please Enter A Valid 5-Digit Zip Code</div>
+            <div class="col-md-6 col-sm-6" id="no-doctors-error">No Doctors Found in that ZIP Code. Please try again.</div>
+        </form>
+        <br>
+        <div class="row" id="results">
+            <div class="col-md-8" id="doctor-listing">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" id="resultNum">Result</th>
+                            <th scope="col" id="pic">Picture</th>
+                            <th scope="col" id="name">Name</th>
+                            <th scope="col" id="specialities">Specialities</th>
+                            <th scope="col" id="address">City</th>
+                            <th scope="col" id="newpatients">Accepting new patients?</th>
+                            <th scope="col" id="rating">Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <td id="rowpic"></td>
+                        <td id="rowname"></td>
+                        <td id="rowspecialities"></td>
+                        <td id="rowaddress"></td>
+                        <td id="rownewpatients"></td>
+                        <td id="rownewrating"></td>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4" id="map"></div>
+        </div>
+        <footer class="footer">
+            <hr>
+
+            <h3>&copy; Copyright 2019</h3>
+
+        </footer>
+    </div>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHncvJKl_oCaonkt-D5ZqXw_1AyrxLUcQ"></script>
+    <script src="javascript/javascript.js"></script>
+
+</body>
+
+</html>
