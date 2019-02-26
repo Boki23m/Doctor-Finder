@@ -166,7 +166,7 @@ body {
 
 #map {
     height: 300px;
-    width: 300px;
+    width: auto;
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -174,15 +174,11 @@ body {
     -o-border-radius: 5px;
 }
 
-@media only screen and (min-width: 960px) and (max-width: 1200px) {
-    #main-container {
-        width: 960px;
-
-    }
+.col-md-12 {
+    padding: 0 10px;
 }
 
 /* Button used to open the contact form - fixed at the bottom of the page */
-
 .open-button {
     background-color: #555;
     color: white;
@@ -286,4 +282,16 @@ body {
     -ms-transition: 0.5s;
     -o-transition: 0.5s;
 }
-
+.table {
+    max-width: 100% !important;
+    overflow: auto;
+    justify-content: center;
+    align-items: center;
+    table-layout:fixed;
+    word-wrap: break-word;
+}
+@media only screen and (max-width: 678px) {
+    th.collapsable, img.collapsable {
+        display: none;
+    }
+}

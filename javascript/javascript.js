@@ -8,27 +8,6 @@ $(document).ready(function () {
     }
 
     // jQuery function that only allows numbers in the input field
-    // (function ($) {
-    //     $.fn.inputFilter = function (inputFilter) {
-    //         return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
-    //             if (inputFilter(this.value)) {
-    //                 this.oldValue = this.value;
-    //                 this.oldSelectionStart = this.selectionStart;
-    //                 this.oldSelectionEnd = this.selectionEnd;
-    //             } else if (this.hasOwnProperty("oldValue")) {
-    //                 this.value = this.oldValue;
-    //                 this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
-    //             }
-    //         });
-    //     };
-    // }(jQuery));
-    // // Calling the jQuery function that filters the input to numbers only and assigns it to the zip code input field
-    // $("#zip").inputFilter(function (value) {
-    //     return /^-?\d*$/.test(value);
-    // });
-
-
-    // jQuery function that only allows numbers in the input field
     (function ($) {
         $.fn.inputFilter = function (inputFilter) {
             return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
@@ -127,11 +106,11 @@ $(document).ready(function () {
                     method: "GET"
                 }).then(function (response) {
                         console.log(response)
-                        for (var i = 0; i < 11; i++) {
+                        for (var i = 0; i < 10; i++) {
                             //new table rows
                             var newTr = $("<tr>").attr("id", "search-results");
                             var newTd = $("<td>");
-                            var newTd1 = $("<img>");
+                            var newTd1 = $("<img>").attr("class", "collapsable");
                             var newTd2 = $("<td>");
                             var newTd3 = $("<td>");
                             var newTd4 = $("<td>");
@@ -172,10 +151,7 @@ $(document).ready(function () {
                             //append my new row to the table body
                             tableBody.append(newTr)
                             newTd1.attr("alt", response.data[i].profile.bio);
-                            newTd1.attr("title", response.data[i].profile.bio);
-
-
-
+                            newTd1.attr("title", response.data[i].profile.bio);                       
 
                             //add markers to the map
                             markers[i] = new google.maps.Marker({
@@ -187,7 +163,6 @@ $(document).ready(function () {
 
                             });
                             infowindow = new google.maps.InfoWindow({
-                                // content: response.data[i].profile.first_name + " " + response.data[i].profile.last_name,
                                 content: contentString
                             });
                             var contentString = response.data[i].profile.first_name + " " + response.data[i].profile.last_name
@@ -196,24 +171,10 @@ $(document).ready(function () {
 
                                 infowindow.open(map, markers[i])
                             });
-
-                            // console.log(markers)
                         }
-
-
-
-
                     }
-
-
                 )
             });
-
-
-
-
         }
     })
-
-
 });
