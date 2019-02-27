@@ -40,8 +40,9 @@ $(document).ready(function () {
         var markers = [];
         var infoWindows = [];
 
-        //clear the table
+        //clear the table and news div
         $("#table-body tr").remove();
+        $("#news div").remove();
         //get the user input
         event.preventDefault();
         specialtyInput = $("#specialty").val();
@@ -96,7 +97,7 @@ $(document).ready(function () {
                             lat: lat,
                             lng: lng
                         },
-                        zoom: 10
+                        zoom: 11
                     });
                 }
                 initMap()
@@ -105,75 +106,101 @@ $(document).ready(function () {
                     url: resource_url,
                     method: "GET"
                 }).then(function (response) {
-                        console.log(response)
-                        for (var i = 0; i < 10; i++) {
-                            //new table rows
-                            var newTr = $("<tr>").attr("id", "search-results");
-                            var newTd = $("<td>");
-                            var newTd1 = $("<img>").attr("class", "collapsable");
-                            var newTd2 = $("<td>");
-                            var newTd3 = $("<td>");
-                            var newTd4 = $("<td>");
-                            var newTd5 = $("<td>");
-                            var newTd6 = $("<img>");
+                    console.log(response)
+                    for (var i = 0; i < 10; i++) {
+                        //new table rows
+                        var newTr = $("<tr>").attr("id", "search-results");
+                        var newTd = $("<td>");
+                        var newTd1 = $("<img>").attr("class", "collapsable");
+                        var newTd2 = $("<td>");
+                        var newTd3 = $("<td>");
+                        var newTd4 = $("<td>");
+                        var newTd5 = $("<td>");
+                        var newTd6 = $("<img>");
 
-                            //new variables for doctor office locations
-
-                            var myLatLng = {
-                                lat: response.data[i].practices[0].lat,
-                                lng: response.data[i].practices[0].lon
-                            }
-
-                            newTd.text(i + 1)
-                            newTd1.attr("src", response.data[i].profile.image_url);
-                            newTd2.text(response.data[i].profile.first_name + " " + response.data[i].profile.last_name);
-                            newTd3.text(response.data[i].specialties[0].name);
-                            newTd4.text(response.data[i].practices[0].visit_address.city);
-                            var newPatients = response.data[i].practices[0].accepts_new_patients;
-
-                            if (newPatients === true) {
-                                newTd5.text("Yes");
-                            } else {
-                                newTd5.text("No");
-                            }
-
-                            if (response.data[i].ratings.length > 0) {
-                                newTd6 = $("<img>");
-                                newTd6.attr("src", response.data[i].ratings[0].image_url_small);
-                            } else {
-                                newTd6 = $("<td>");
-                                newTd6.text("N/A");
-                            }
-                            //Append table data to table rows
-                            newTr.append(newTd, newTd1, newTd2, newTd3, newTd4, newTd5, newTd6);
-                            //Append table row to the table body
-                            var tableBody = $("#table-body")
-                            //append my new row to the table body
-                            tableBody.append(newTr)
-                            newTd1.attr("alt", response.data[i].profile.bio);
-                            newTd1.attr("title", response.data[i].profile.bio);                       
-
-                            //add markers to the map
-                            markers[i] = new google.maps.Marker({
-                                position: myLatLng,
-                                map: map,
-                                title: response.data[i].profile.first_name + " " + response.data[i].profile.last_name + " " + response.data[i].specialties[0].name,
-                                id: i,
-                                label: (i + 1).toString()
-
-                            });
-                            infowindow = new google.maps.InfoWindow({
-                                content: contentString
-                            });
-                            var contentString = response.data[i].profile.first_name + " " + response.data[i].profile.last_name
-
-                            google.maps.event.addListener(markers[i], 'click', function () {
-
-                                infowindow.open(map, markers[i])
-                            });
+                        //new variables for doctor office locations
+                        var myLatLng = {
+                            lat: response.data[i].practices[0].lat,
+                            lng: response.data[i].practices[0].lon
                         }
+
+                        newTd.text(i + 1)
+                        newTd1.attr("src", response.data[i].profile.image_url);
+                        newTd2.text(response.data[i].profile.first_name + " " + response.data[i].profile.last_name);
+                        newTd3.text(response.data[i].specialties[0].name);
+                        newTd4.text(response.data[i].practices[0].visit_address.city);
+                        var newPatients = response.data[i].practices[0].accepts_new_patients;
+
+                        if (newPatients === true) {
+                            newTd5.text("Yes");
+                        } else {
+                            newTd5.text("No");
+                        }
+
+                        if (response.data[i].ratings.length > 0) {
+                            newTd6 = $("<img>");
+                            newTd6.attr("src", response.data[i].ratings[0].image_url_small);
+                        } else {
+                            newTd6 = $("<td>");
+                            newTd6.text("N/A");
+                        }
+                        //Append table data to table rows
+                        newTr.append(newTd, newTd1, newTd2, newTd3, newTd4, newTd5, newTd6);
+                        //Append table row to the table body
+                        var tableBody = $("#table-body")
+                        //append my new row to the table body
+                        tableBody.append(newTr)
+                        newTd1.attr("alt", response.data[i].profile.bio);
+                        newTd1.attr("title", response.data[i].profile.bio);
+
+                        //add markers to the map
+                        markers[i] = new google.maps.Marker({
+                            position: myLatLng,
+                            map: map,
+                            title: response.data[i].profile.first_name + " " + response.data[i].profile.last_name + " " + response.data[i].specialties[0].name,
+                            id: i,
+                            label: (i + 1).toString()
+
+                        });
+                        infowindow = new google.maps.InfoWindow({
+                            content: contentString
+                        });
+                        var contentString = response.data[i].profile.first_name + " " + response.data[i].profile.last_name
+
+                        google.maps.event.addListener(markers[i], 'click', function () {
+
+                            infowindow.open(map, markers[i])
+                        });
                     }
+                }
                 )
+                // Medical News API
+                var newsapi = '7fabcb6f2bdc479e826d08269c5e8647';
+                var news_resource_url = 'https://newsapi.org/v2/top-headlines?sources=medical-news-today&apiKey=' + newsapi;
+                $.ajax({
+                    url: news_resource_url,
+                    method: "GET"
+                }).then(function (response) {
+                    console.log(response)
+
+                    for (var i = 0; i < 4; i++) {
+                        var newCard = $("<div>").attr("class", "card");
+                        var newCardImg = $("<img>").attr("src", response.articles[i].urlToImage);
+                        var newCardTitle = $("<h5>");
+                        var newCardText = $("<p>");
+                        var newCardBtn = $("<a>").attr("class", "btn btn-outline-primary");
+
+                        newCardImg.attr("class", "card-img-top");
+                        newCardTitle.text(response.articles[i].title);
+                        newCardText.text(response.articles[i].description);
+                        newCardBtn.text("Read more  >>>");
+                        newCardBtn.attr("href", response.articles[i].url);
+                        newCard.append(newCardImg, newCardTitle, newCardText, newCardBtn);
+                        var card = $("#news");
+                        //append my new row to the table body
+                        card.append(newCard);
+                    }
+                })
             });
         }
     })
