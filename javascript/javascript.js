@@ -85,7 +85,7 @@ $(document).ready(function () {
                     $("#no-doctors-error").show(1000);
                     $("#zip").removeClass('form-error');
                 }
-                var docapikey = "9dd880db4c3a037bcf6b4b352db255c2";
+                var docapikey = config.BETTERDR_API_KEY;
                 var resource_url = 'https://api.betterdoctor.com/2016-03-01/doctors?query=' 
                     + symptomInput + "&specialty_uid=" + specialtyInput + "&location=" + lat + "%2c" + lng + "%2c10" + '&user_key=' + docapikey;
                 console.log(resource_url)
@@ -176,7 +176,7 @@ $(document).ready(function () {
                 }
                 )
                 // Medical News API
-                var newsapi = '7fabcb6f2bdc479e826d08269c5e8647';
+                var newsapi = config.NEWS_API_KEY;
                 var news_resource_url = 'https://newsapi.org/v2/top-headlines?sources=medical-news-today&apiKey=' + newsapi;
                 $.ajax({
                     url: news_resource_url,
