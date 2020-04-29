@@ -85,8 +85,9 @@ $(document).ready(function () {
                     $("#no-doctors-error").show(1000);
                     $("#zip").removeClass('form-error');
                 }
-                var docapikey = "3d8e6119d3a6fd86b2f6414e6f6ade72";
-                var resource_url = 'https://api.betterdoctor.com/2016-03-01/doctors?query=' + symptomInput + "&specialty_uid=" + specialtyInput + "&location=" + lat + "%2c" + lng + "%2c5" + '&user_key=' + docapikey;
+                var docapikey = "9dd880db4c3a037bcf6b4b352db255c2";
+                var resource_url = 'https://api.betterdoctor.com/2016-03-01/doctors?query=' 
+                    + symptomInput + "&specialty_uid=" + specialtyInput + "&location=" + lat + "%2c" + lng + "%2c10" + '&user_key=' + docapikey;
                 console.log(resource_url)
                 var map;
                 console.log('google', google);
