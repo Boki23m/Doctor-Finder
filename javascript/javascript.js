@@ -74,7 +74,6 @@ $(document).ready(function () {
                 'address': address
             }, function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
-                    console.log(results);
                     lat = results[0].geometry.location.lat();
                     console.log(lat);
                     lng = results[0].geometry.location.lng();
@@ -86,11 +85,9 @@ $(document).ready(function () {
                     $("#zip").removeClass('form-error');
                 }
                 var docapikey = config.BETTERDR_API_KEY;
-                var resource_url = 'https://api.betterdoctor.com/2016-03-01/doctors?query=' 
+                var resource_url = 'https://cors-anywhere.herokuapp.com/https://api.betterdoctor.com/2016-03-01/doctors?query=' 
                     + symptomInput + "&specialty_uid=" + specialtyInput + "&location=" + lat + "%2c" + lng + "%2c10" + '&user_key=' + docapikey;
-                console.log(resource_url)
                 var map;
-                console.log('google', google);
 
                 function initMap() {
                     map = new google.maps.Map(document.getElementById('map'), {
@@ -177,7 +174,7 @@ $(document).ready(function () {
                 )
                 // Medical News API
                 var newsapi = config.NEWS_API_KEY;
-                var news_resource_url = 'https://newsapi.org/v2/top-headlines?sources=medical-news-today&apiKey=' + newsapi;
+                var news_resource_url = 'https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?sources=medical-news-today&apiKey=' + newsapi;
                 $.ajax({
                     url: news_resource_url,
                     method: "GET"
