@@ -85,7 +85,7 @@ $(document).ready(function () {
                     $("#zip").removeClass('form-error');
                 }
                 var docapikey = config.BETTERDR_API_KEY;
-                var resource_url = 'http://cors-anywhere.herokuapp.com/https://api.betterdoctor.com/2016-03-01/doctors?query=' 
+                var resource_url = 'https://api.betterdoctor.com/2016-03-01/doctors?query=' 
                     + symptomInput + "&specialty_uid=" + specialtyInput + "&location=" + lat + "%2c" + lng + "%2c10" + '&user_key=' + docapikey;
                 var map;
 
@@ -174,7 +174,7 @@ $(document).ready(function () {
                 )
                 // Medical News API
                 var newsapi = config.NEWS_API_KEY;
-                var news_resource_url = 'http://cors-anywhere.herokuapp.com/http://newsapi.org/v2/top-headlines?sources=medical-news-today&apiKey=' + newsapi;
+                var news_resource_url = 'https://newsapi.org/v2/top-headlines?sources=medical-news-today&apiKey=' + newsapi;
                 $.ajax({
                     url: news_resource_url,
                     method: "GET"
