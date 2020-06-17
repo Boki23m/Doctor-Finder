@@ -75,9 +75,7 @@ $(document).ready(function () {
             }, function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     lat = results[0].geometry.location.lat();
-                    console.log(lat);
                     lng = results[0].geometry.location.lng();
-                    console.log(lng);
                 } else {
                     $("#results").hide();
                     $(".footer").hide();
@@ -104,7 +102,6 @@ $(document).ready(function () {
                     url: resource_url,
                     method: "GET"
                 }).then(function (response) {
-                    console.log(response)
                     for (var i = 0; i < 10; i++) {
                         //new table rows
                         var newTr = $("<tr>").attr("id", "search-results");
@@ -179,8 +176,6 @@ $(document).ready(function () {
                     url: news_resource_url,
                     method: "GET"
                 }).then(function (response) {
-                    console.log(response)
-
                     for (var i = 0; i < 4; i++) {
                         var newCard = $("<div>").attr("class", "card");
                         var newCardImg = $("<img>").attr("src", response.articles[i].urlToImage);
